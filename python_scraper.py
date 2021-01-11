@@ -12,6 +12,7 @@ def when_to_time(when_sentence):
     return time.strftime("%Y-%m-%d %H:%M:%S")
 
 def scrape_data(path):
+    db.migrate()
     proxies = {
         'http': 'socks5://127.0.0.1:9050',
         'https': 'socks5://127.0.0.1:9050'
@@ -32,15 +33,16 @@ def scrape_data(path):
             # removing the when sentence
             children = children[:3] + children[4:]
             posts.append(children)
-    db.migrate()
+    # db.migrate()
     filtered_posts = db.reduce_duplicates(posts)
     if len(filtered_posts) > 0:
-        db.insert_data(filtered_posts)
-    else: print("Old news man..")
+        msg = db.insert_data(filtered_posts)
+        return msg
+    return "Old news man.."
 def run():
     try:
-        #path = "http://nzxj65x32vh2fkhk.onion/all"
-        path = "https://paste.scratchbook.ch/lists"
-        scrape_data(path)
+        path = "http://nzxj65x32vh2fkhk.onion/all"
+        # path = "https://paste.scratchbook.ch/lists"
+        return scrape_data(path)
     except Exception as err:
         print(err)

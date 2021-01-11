@@ -5,7 +5,7 @@ def migrate():
         mydb = db.connect(
             host='localhost',
             user='root',
-            passwd='kalia123',
+            passwd='xCaliber73',
             database='scraping_final',
             auth_plugin='mysql_native_password'
         )
@@ -16,7 +16,7 @@ def migrate():
             mydb = db.connect(
                 host='localhost',
                 user='root',
-                passwd='kalia123',
+                passwd='xCaliber73',
                 auth_plugin='mysql_native_password'
             )
             mycursor = mydb.cursor()
@@ -25,7 +25,7 @@ def migrate():
             mydb = db.connect(
                 host='localhost',
                 user='root',
-                passwd='kalia123',
+                passwd='xCaliber73',
                 database='scraping_final',
                 auth_plugin='mysql_native_password'
             )
@@ -45,7 +45,7 @@ def reduce_duplicates(new_posts):
         mydb = db.connect(
             host='localhost',
             user='root',
-            passwd='kalia123',
+            passwd='xCaliber73',
             database='scraping_final',
             auth_plugin='mysql_native_password'
         )
@@ -53,9 +53,6 @@ def reduce_duplicates(new_posts):
         mycursor.execute("SELECT title,author_name,content,post_time FROM posts")
         db_posts = mycursor.fetchall()
         if len(db_posts) > 0:
-            # new_posts = list(filter(lambda post: post in db_posts == False, new_posts))
-            #new_posts = [post for post in new_posts if post not in db_posts]
-
             filtered_posts = []
             for post in new_posts:
                 current_post_title = post[0]
@@ -74,7 +71,7 @@ def insert_data(data):
     mydb = db.connect(
         host='localhost',
         user='root',
-        passwd='kalia123',
+        passwd='xCaliber73',
         database='scraping_final',
         auth_plugin='mysql_native_password'
     )
@@ -83,4 +80,5 @@ def insert_data(data):
     val = data
     mycursor.executemany(sql, val)
     mydb.commit()
-    print(mycursor.rowcount, "record inserted.")
+    msg = f"{mycursor.rowcount}, record inserted."
+    return msg
