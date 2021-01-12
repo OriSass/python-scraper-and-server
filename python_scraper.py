@@ -41,8 +41,8 @@ def scrape_data(path):
     return "Old news man.."
 def run():
     try:
-        path = "http://nzxj65x32vh2fkhk.onion/all"
-        # path = "https://paste.scratchbook.ch/lists"
+        # path = "http://nzxj65x32vh2fkhk.onion/all"
+        path = "https://paste.scratchbook.ch/lists"
         return scrape_data(path)
     except Exception as err:
         print(err)
